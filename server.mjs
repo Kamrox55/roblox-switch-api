@@ -27,16 +27,16 @@ const server = http.createServer(async (req, res) => {
     }
 
     try {
-      const response = await fetch(
-        `https://www.roblox.com/users/favorites/list-json?assetTypeId=9&itemsPerPage=50&pageNumber=1&userId=${userId}`,
-        {
-          headers: {
-            "User-Agent": "Mozilla/5.0",
-            "Accept": "application/json"
-          },
-          signal: AbortSignal.timeout(10000)
-        }
-      );
+  const response = await fetch(
+  `https://games.roblox.com/v2/users/${userId}/favorite/games?limit=50`,
+  {
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+      "Accept": "application/json"
+    },
+    signal: AbortSignal.timeout(10000)
+  }
+);
 
       if (!response.ok) {
         throw new Error(`Roblox returned ${response.status}`);
